@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>El Código Estoico — 30 Días para una Mente Inquebrantable</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --bg:        #FFFFFF;
+      --fg:        #111827;
+      --primary:   #3B82F6;
+      --primary-d: #2563EB;
+      --secondary: #10B981;
+      --accent:    #F59E0B;
+      --muted:     #F3F4F6;
+      --border:    #E5E7EB;
+      --gray600:   #4B5563;
+      --gray400:   #9CA3AF;
+      --font:      'Outfit', system-ui, sans-serif;
+      --r:         8px;
+    }
+
+    body { font-family: var(--font); background: var(--bg); color: var(--fg); line-height: 1.6; overflow-x: hidden; }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+    section { padding: 96px 0; }
+
+    /* BADGE */
+    .badge {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--fg);
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 5px 14px; border-radius: 100px;
+    }
+    .badge-blue  { background: var(--primary);   color: #fff; }
+    .badge-green { background: var(--secondary);  color: #fff; }
+    .badge-white { background: rgba(255,255,255,0.2); color: #fff; }
+
+    .section-label { text-align: center; margin-bottom: 16px; }
+    .section-title  { font-size: clamp(28px, 4vw, 44px); font-weight: 800; letter-spacing: -0.02em; text-align: center; line-height: 1.15; margin-bottom: 16px; }
+    .section-desc   { font-size: 17px; color: var(--gray600); text-align: center; max-width: 600px; margin: 0 auto 56px; line-height: 1.7; }
+
+    /* BUTTONS */
+    .btn { display: inline-block; font-family: var(--font); font-weight: 700; border-radius: var(--r); cursor: pointer; transition: all 0.2s; text-align: center; border: none; }
+    .btn-primary { background: var(--primary); color: #fff; padding: 20px 40px; font-size: 17px; }
+    .btn-primary:hover { background: var(--primary-d); transform: scale(1.05); }
+    .btn-accent  { background: var(--accent);  color: var(--fg); padding: 20px 40px; font-size: 17px; }
+    .btn-accent:hover  { background: #D97706; transform: scale(1.05); }
+    .btn-large   { padding: 22px 52px; font-size: 19px; }
+    .btn-block   { display: block; width: 100%; }
+    .btn-sub     { display: block; font-size: 12px; font-weight: 500; opacity: 0.8; margin-top: 4px; letter-spacing: 0.05em; }
+
+    /* URGENCY BAR */
+    .urgency-bar { background: var(--fg); color: #fff; text-align: center; padding: 12px 24px; font-size: 13px; font-weight: 600; letter-spacing: 0.04em; }
+    .urgency-bar .dot { color: var(--accent); margin: 0 10px; }
+
+    /* ===== HERO ===== */
+    #hero { background: var(--primary); color: #fff; padding: 80px 0 96px; position: relative; overflow: hidden; }
+    #hero .geo { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.06); }
+    #hero .geo-1 { width: 500px; height: 500px; top: -160px; right: -120px; }
+    #hero .geo-2 { width: 300px; height: 300px; bottom: -100px; left: -80px; }
+    #hero .geo-sq { position: absolute; width: 200px; height: 200px; background: rgba(255,255,255,0.04); transform: rotate(30deg); top: 40%; right: 5%; border-radius: var(--r); }
+
+    .hero-inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 260px; gap: 60px; align-items: center; max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+    .hero-tag { display: inline-block; background: rgba(255,255,255,0.18); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 5px 14px; border-radius: 100px; margin-bottom: 20px; }
+
+    .hero-headline { font-size: clamp(32px, 4.5vw, 52px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 22px; }
+    .hero-headline .hl { background: var(--accent); color: var(--fg); padding: 0 6px; border-radius: 4px; }
+
+    .hero-sub { font-size: 17px; line-height: 1.75; opacity: 0.9; margin-bottom: 36px; max-width: 540px; }
+
+    .hero-trust { margin-top: 18px; font-size: 13px; opacity: 0.75; display: flex; gap: 16px; flex-wrap: wrap; }
+
+    /* Book flat */
+    .book-flat { width: 220px; height: 290px; background: var(--fg); border-radius: 4px 12px 12px 4px; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 28px 20px; transition: transform 0.3s; }
+    .book-flat:hover { transform: rotate(-3deg) scale(1.03); }
+    .book-flat::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 22px; background: #1F2937; border-radius: 4px 0 0 4px; }
+    .book-flat .b-icon  { font-size: 40px; margin-bottom: 14px; }
+    .book-flat .b-title { font-size: 18px; font-weight: 800; color: var(--accent); text-align: center; line-height: 1.25; letter-spacing: -0.01em; }
+    .book-flat .b-sub   { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gray400); margin-top: 8px; text-align: center; }
+
+    /* ===== HOOK ===== */
+    #hook { background: var(--bg); }
+
+    .hook-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px; }
+
+    .hook-card { background: var(--muted); border-radius: var(--r); padding: 24px 22px; display: flex; align-items: flex-start; gap: 14px; transition: all 0.2s; cursor: default; }
+    .hook-card:hover { background: #E5E7EB; transform: scale(1.02); }
+    .hook-card .icon { width: 44px; height: 44px; background: var(--primary); border-radius: var(--r); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+    .hook-card p { font-size: 14px; font-weight: 500; color: var(--fg); line-height: 1.55; }
+    .hook-card.full { grid-column: 1 / -1; }
+
+    .hook-reveal { background: var(--fg); color: #fff; border-radius: var(--r); padding: 48px 40px; text-align: center; position: relative; overflow: hidden; }
+    .hook-reveal::before { content: ''; position: absolute; width: 300px; height: 300px; border-radius: 50%; background: rgba(255,255,255,0.04); top: -100px; right: -80px; }
+    .hook-reveal h3 { font-size: clamp(22px, 3vw, 30px); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 14px; position: relative; z-index: 1; }
+    .hook-reveal h3 span { color: var(--accent); }
+    .hook-reveal p { font-size: 16px; opacity: 0.8; max-width: 540px; margin: 0 auto; line-height: 1.7; position: relative; z-index: 1; }
+
+    /* ===== STORY ===== */
+    #story { background: var(--muted); }
+
+    .story-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+    .story-text p { font-size: 16px; color: var(--gray600); line-height: 1.85; margin-bottom: 20px; }
+    .story-text p strong { color: var(--fg); font-weight: 700; }
+
+    .story-quote { border-left: 6px solid var(--primary); padding: 18px 22px; background: #fff; border-radius: 0 var(--r) var(--r) 0; margin: 24px 0; }
+    .story-quote p { font-size: 18px; font-weight: 600; font-style: italic; color: var(--fg); margin: 0 0 8px; }
+    .story-quote cite { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--primary); font-style: normal; }
+
+    .story-visual { display: flex; flex-direction: column; gap: 16px; }
+    .stat-card { background: var(--primary); color: #fff; border-radius: var(--r); padding: 28px 24px; transition: all 0.2s; }
+    .stat-card:hover { transform: scale(1.02); }
+    .stat-card.green { background: var(--secondary); }
+    .stat-card.dark  { background: var(--fg); }
+    .stat-num { font-size: 48px; font-weight: 800; letter-spacing: -0.03em; line-height: 1; margin-bottom: 6px; }
+    .stat-num .a { color: var(--accent); }
+    .stat-label { font-size: 14px; font-weight: 500; opacity: 0.85; }
+
+    /* ===== BENEFITS ===== */
+    #benefits { background: var(--bg); }
+
+    .benefits-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+
+    .benefit-card { background: var(--muted); border-radius: var(--r); padding: 28px 24px; transition: all 0.2s; cursor: default; }
+    .benefit-card:hover { background: #DBEAFE; transform: scale(1.02); }
+    .benefit-card:hover .b-icon-wrap { transform: scale(1.1); }
+
+    .b-icon-wrap { width: 52px; height: 52px; background: var(--primary); border-radius: var(--r); display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 16px; transition: transform 0.2s; }
+    .benefit-card:nth-child(3) .b-icon-wrap { background: var(--secondary); }
+    .benefit-card:nth-child(5) .b-icon-wrap { background: #8B5CF6; }
+    .benefit-card:nth-child(7) .b-icon-wrap { background: var(--accent); }
+
+    .benefit-card h3 { font-size: 16px; font-weight: 700; color: var(--fg); margin-bottom: 8px; letter-spacing: -0.01em; }
+    .benefit-card p  { font-size: 14px; color: var(--gray600); line-height: 1.6; }
+
+    .benefit-card.full { grid-column: 1 / -1; background: var(--fg); }
+    .benefit-card.full h3 { color: #fff; }
+    .benefit-card.full p  { color: rgba(255,255,255,0.7); }
+    .benefit-card.full .b-icon-wrap { background: var(--accent); }
+    .benefit-card.full:hover { background: #1F2937; transform: scale(1.01); }
+
+    /* ===== PRICE ===== */
+    #price { background: var(--accent); position: relative; overflow: hidden; }
+    #price .geo-bg { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.12); }
+    #price .g1 { width: 400px; height: 400px; top: -150px; left: -100px; }
+    #price .g2 { width: 250px; height: 250px; bottom: -80px; right: -60px; }
+
+    .price-inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+
+    .price-left h2 { font-size: clamp(28px, 4vw, 44px); font-weight: 800; letter-spacing: -0.02em; color: var(--fg); line-height: 1.15; margin-bottom: 16px; }
+    .price-left p  { font-size: 16px; color: var(--fg); opacity: 0.75; line-height: 1.7; margin-bottom: 28px; }
+
+    .check-list { display: flex; flex-direction: column; gap: 10px; }
+    .check-item { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; color: var(--fg); }
+    .check-box  { width: 20px; height: 20px; background: var(--fg); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 11px; flex-shrink: 0; }
+
+    .price-box  { background: var(--bg); border-radius: var(--r); padding: 40px 36px; text-align: center; }
+    .price-was  { font-size: 16px; color: var(--gray400); text-decoration: line-through; font-weight: 500; margin-bottom: 4px; }
+    .price-now  { font-size: 80px; font-weight: 800; color: var(--fg); letter-spacing: -0.04em; line-height: 1; margin-bottom: 4px; }
+    .price-note { font-size: 13px; color: var(--gray600); margin-bottom: 28px; }
+    .price-save { display: inline-block; background: var(--secondary); color: #fff; font-size: 13px; font-weight: 700; padding: 6px 16px; border-radius: 100px; margin-bottom: 28px; }
+
+    /* ===== TESTIMONIALS ===== */
+    #testimonials { background: var(--muted); }
+
+    .test-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+    .test-card { background: var(--bg); border-radius: var(--r); padding: 28px 24px; transition: all 0.2s; cursor: default; }
+    .test-card:hover { transform: scale(1.02); background: #EFF6FF; }
+    .stars { color: var(--accent); font-size: 15px; letter-spacing: 2px; margin-bottom: 14px; }
+    .test-text { font-size: 14px; color: var(--gray600); line-height: 1.75; margin-bottom: 20px; font-style: italic; }
+    .test-author { display: flex; align-items: center; gap: 12px; }
+    .test-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .test-card:nth-child(2) .test-avatar { background: var(--secondary); }
+    .test-card:nth-child(3) .test-avatar { background: var(--fg); }
+    .test-name { font-size: 14px; font-weight: 700; color: var(--fg); }
+    .test-info { font-size: 12px; color: var(--gray400); }
+
+    /* ===== GUARANTEE ===== */
+    #guarantee { background: var(--fg); color: #fff; position: relative; overflow: hidden; }
+    #guarantee .geo { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.04); }
+    #guarantee .g1 { width: 350px; height: 350px; top: -100px; right: -80px; }
+    #guarantee .g2 { width: 200px; height: 200px; bottom: -60px; left: -60px; }
+
+    .guarantee-inner { position: relative; z-index: 1; display: grid; grid-template-columns: auto 1fr; gap: 48px; align-items: center; max-width: 760px; margin: 0 auto; }
+    .guarantee-seal { width: 120px; height: 120px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 48px; }
+    .guarantee-body h2 { font-size: clamp(24px, 3vw, 36px); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 14px; }
+    .guarantee-body p  { font-size: 16px; opacity: 0.8; line-height: 1.75; }
+    .guarantee-body p strong { color: var(--accent); opacity: 1; font-weight: 700; }
+
+    /* ===== FINAL CTA ===== */
+    #cta-final { background: var(--primary); color: #fff; text-align: center; position: relative; overflow: hidden; }
+    #cta-final .geo { position: absolute; background: rgba(255,255,255,0.06); border-radius: 50%; }
+    #cta-final .g1  { width: 400px; height: 400px; top: -120px; left: 50%; transform: translateX(-50%); }
+
+    .cta-inner { position: relative; z-index: 1; }
+    .cta-title { font-size: clamp(28px, 4.5vw, 50px); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 18px; line-height: 1.15; }
+    .cta-desc  { font-size: 17px; opacity: 0.85; max-width: 560px; margin: 0 auto 36px; line-height: 1.7; }
+    .cta-trust { margin-top: 20px; font-size: 13px; opacity: 0.7; display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; }
+
+    /* ===== PS ===== */
+    #ps { background: var(--bg); border-top: 2px solid var(--border); padding: 60px 0; }
+    .ps-inner { max-width: 680px; margin: 0 auto; text-align: center; }
+    .ps-label { font-size: 20px; font-weight: 800; color: var(--primary); margin-bottom: 16px; }
+    .ps-text  { font-size: 16px; color: var(--gray600); line-height: 1.85; font-style: italic; margin-bottom: 32px; }
+
+    /* ===== FOOTER ===== */
+    footer { background: var(--fg); color: rgba(255,255,255,0.5); text-align: center; padding: 28px 24px; font-size: 12px; }
+    footer a { color: rgba(255,255,255,0.5); text-decoration: underline; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      section { padding: 64px 0; }
+      .hero-inner { grid-template-columns: 1fr; text-align: center; }
+      .book-flat  { margin: 0 auto; }
+      .hero-trust { justify-content: center; }
+      .hook-grid  { grid-template-columns: 1fr; }
+      .story-layout  { grid-template-columns: 1fr; }
+      .benefits-grid { grid-template-columns: 1fr; }
+      .price-inner   { grid-template-columns: 1fr; }
+      .test-grid     { grid-template-columns: 1fr; }
+      .guarantee-inner { grid-template-columns: 1fr; text-align: center; }
+      .guarantee-seal  { margin: 0 auto; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- URGENCY BAR -->
+<div class="urgency-bar">
+  ⚡ OFERTA LIMITADA<span class="dot">●</span>Solo hoy $5,90 USD<span class="dot">●</span>🛡️ Garantía 7 días sin preguntas
+</div>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <div class="geo geo-1"></div>
+  <div class="geo geo-2"></div>
+  <div class="geo-sq"></div>
+
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag">Filosofía Milenaria · Método Moderno · 30 Días</div>
+      <h1 class="hero-headline">
+        Si la Ansiedad te Está<br>
+        <span class="hl">Robando la Vida</span>,<br>
+        Este Método te Devuelve<br>el Control en 30 Días
+      </h1>
+      <p class="hero-sub">
+        El sistema práctico que usaban emperadores romanos y los líderes más exitosos del mundo para dominar sus emociones, eliminar la ansiedad y vivir con propósito — sin meditación complicada, sin terapias costosas.
+      </p>
+      <a href="https://pay.kiwify.com.br/nPdHG0c" target="_blank" class="btn btn-accent btn-large">
+        SÍ, QUIERO TRANSFORMAR MI MENTE POR $5,90
+        <span class="btn-sub">🔒 Pago seguro · Acceso inmediato · Garantía 7 días</span>
+      </a>
+      <div class="hero-trust">
+        <span>✅ Sin suscripción</span>
+        <span>✅ Acceso de por vida</span>
+        <span>✅ Descarga inmediata</span>
+      </div>
+    </div>
+
+    <!-- Book flat visual — replace inner content with <img src="images/cover.png"> if you have a cover -->
+    <div class="book-flat">
+      <div class="b-icon">⚜️</div>
+      <div class="b-title">El Código<br>Estoico</div>
+      <div class="b-sub">30 Días</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== HOOK ===== -->
+<section id="hook">
+  <div class="container">
+    <div class="section-label"><span class="badge">¿Te identificas?</span></div>
+    <h2 class="section-title">¿Te Suena Familiar?</h2>
+    <p class="section-desc">Si respondiste "sí" a alguna de estas situaciones, no estás solo — y tienes solución.</p>
+
+    <div class="hook-grid">
+      <div class="hook-card">
+        <div class="icon">😰</div>
+        <p>Te despiertas a las 3 AM con la mente acelerada, sin poder volver a dormir</p>
+      </div>
+      <div class="hook-card">
+        <div class="icon">😤</div>
+        <p>Reaccionas de forma impulsiva y luego te arrepientes de lo que dijiste o hiciste</p>
+      </div>
+      <div class="hook-card">
+        <div class="icon">😔</div>
+        <p>Ves pasar los días sin saber exactamente qué estás haciendo con tu vida</p>
+      </div>
+      <div class="hook-card">
+        <div class="icon">😩</div>
+        <p>La incertidumbre económica, el trabajo y la familia te están consumiendo por dentro</p>
+      </div>
+      <div class="hook-card full">
+        <div class="icon">🤯</div>
+        <p>Tu mente nunca para — como si tuvieras 100 pestañas abiertas al mismo tiempo y no pudieras cerrar ninguna</p>
+      </div>
+    </div>
+
+    <div class="hook-reveal">
+      <h3>No estás roto. No eres débil.<br><span>Solo nadie te enseñó a manejar tu mente.</span></h3>
+      <p>Hace 2,000 años, un grupo de filósofos descubrió exactamente cómo hacerlo. Emperadores, esclavos y generales lo usaron para dominar cualquier crisis. Ese mismo método está disponible para ti — hoy, por menos que un café.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== STORY ===== -->
+<section id="story">
+  <div class="container">
+    <div class="section-label"><span class="badge badge-blue">La solución</span></div>
+    <h2 class="section-title">Una Filosofía de 2,000 Años,<br>Adaptada a tu Vida Hoy</h2>
+
+    <div class="story-layout">
+      <div class="story-text">
+        <p>En un mundo que te bombardea con ansiedad, incertidumbre y ruido constante, el <strong>estoicismo</strong> emerge como la filosofía más poderosa y práctica que la humanidad ha creado.</p>
+
+        <div class="story-quote">
+          <p>"Nunca sufras por anticipación, nunca te turbes sin una razón real."</p>
+          <cite>— Marco Aurelio, Emperador de Roma</cite>
+        </div>
+
+        <p>Durante más de dos mil años, esta sabiduría transformó a emperadores como Marco Aurelio, a esclavos libres como Epicteto y a consejeros imperiales como Séneca en personas con <strong>fortaleza interior inquebrantable</strong>.</p>
+
+        <p><strong>El Código Estoico</strong> es el manual definitivo que condensa esta tradición en un método accionable de <strong>30 días</strong>. Sin teoría académica — un plan paso a paso con ejercicios prácticos, reflexiones diarias y herramientas que puedes aplicar desde el primer día.</p>
+      </div>
+
+      <div class="story-visual">
+        <div class="stat-card">
+          <div class="stat-num">2<span class="a">,000</span></div>
+          <div class="stat-label">años de sabiduría comprobada</div>
+        </div>
+        <div class="stat-card green">
+          <div class="stat-num">30</div>
+          <div class="stat-label">días para transformar tu mente</div>
+        </div>
+        <div class="stat-card dark">
+          <div class="stat-num" style="color:var(--accent);">$5,90</div>
+          <div class="stat-label" style="color:rgba(255,255,255,0.7);">menos que un café con amigos</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== BENEFITS ===== -->
+<section id="benefits">
+  <div class="container">
+    <div class="section-label"><span class="badge">Resultados concretos</span></div>
+    <h2 class="section-title">7 Transformaciones que<br>Cambian Todo en 30 Días</h2>
+    <p class="section-desc">Cada día del método está diseñado para producir un cambio real, medible, en cómo piensas y cómo reaccionas.</p>
+
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="b-icon-wrap">🧠</div>
+        <h3>Elimina la ansiedad crónica</h3>
+        <p>Aplica la Dicotomía del Control — el secreto #1 del estoicismo que libera tu mente en minutos y cambia cómo percibes los problemas.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="b-icon-wrap">⚔️</div>
+        <h3>Domina tus emociones</h3>
+        <p>Usa las técnicas exactas de Marco Aurelio, Séneca y Epicteto antes de que tus emociones te controlen a ti.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="b-icon-wrap">🎯</div>
+        <h3>Toma decisiones con claridad</h3>
+        <p>Incluso en los momentos más caóticos — trabajo, familia, dinero, pareja — sabrás exactamente qué hacer.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="b-icon-wrap">🏛️</div>
+        <h3>Construye disciplina inquebrantable</h3>
+        <p>Las 4 virtudes cardinales como brújula de vida: Sabiduría, Valor, Justicia y Templanza como estilo de vida real.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="b-icon-wrap">🔥</div>
+        <h3>Convierte adversidades en ventajas</h3>
+        <p>El principio del Amor Fati — la mentalidad de los grandes líderes para convertir cada golpe en combustible de crecimiento.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="b-icon-wrap">⏳</div>
+        <h3>Recupera el enfoque y dirección</h3>
+        <p>Aplica el Memento Mori para priorizar lo que de verdad importa y vivir con propósito real — sin angustia existencial.</p>
+      </div>
+      <div class="benefit-card full">
+        <div class="b-icon-wrap">😴</div>
+        <h3>Duerme mejor, piensa más claro y vive con propósito</h3>
+        <p>El plan de 30 días paso a paso reorganiza tu mente desde dentro: mejora tu sueño, tu claridad mental y tu sensación de dirección en la vida. El resultado es una versión de ti mismo que funciona bajo presión — sin romperse.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== PRICE ===== -->
+<section id="price">
+  <div class="geo-bg g1"></div>
+  <div class="geo-bg g2"></div>
+
+  <div class="container">
+    <div class="price-inner">
+      <div class="price-left">
+        <span class="badge" style="margin-bottom:16px; display:inline-block;">Oferta limitada</span>
+        <h2>Tu inversión en una mente inquebrantable</h2>
+        <p>El sistema estoico de 30 días condensado en un ebook práctico, directo, diseñado para el ritmo de vida latinoamericano. Aplicable desde el primer día.</p>
+        <div class="check-list">
+          <div class="check-item"><div class="check-box">✓</div>Acceso inmediato al ebook completo</div>
+          <div class="check-item"><div class="check-box">✓</div>30 días de ejercicios prácticos diarios</div>
+          <div class="check-item"><div class="check-box">✓</div>Técnicas de Marco Aurelio, Epicteto y Séneca</div>
+          <div class="check-item"><div class="check-box">✓</div>Garantía incondicional de 7 días</div>
+        </div>
+      </div>
+
+      <div class="price-box">
+        <div class="price-was">Precio normal: $27 USD</div>
+        <div class="price-now">$5,90</div>
+        <div class="price-note">Pago único · Sin suscripción · Acceso de por vida</div>
+        <div class="price-save">🔥 Ahorras 78% — Solo hoy</div>
+        <a href="https://pay.kiwify.com.br/nPdHG0c" target="_blank" class="btn btn-primary btn-block" style="font-size:16px; padding:20px 24px;">
+          QUIERO MI CÓDIGO ESTOICO AHORA
+          <span class="btn-sub">🔒 Pago 100% seguro · Acceso inmediato</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== TESTIMONIALS ===== -->
+<section id="testimonials">
+  <div class="container">
+    <div class="section-label"><span class="badge badge-green">Historias reales</span></div>
+    <h2 class="section-title">Lo Que Dicen Quienes<br>Ya Aplicaron el Método</h2>
+    <p class="section-desc">Personas reales con vidas reales que aplicaron el método y vieron resultados.</p>
+
+    <div class="test-grid">
+      <div class="test-card">
+        <div class="stars">★★★★★</div>
+        <p class="test-text">"Llevaba 3 años con ataques de pánico. En la segunda semana del método ya dormía completo. La Dicotomía del Control cambió la forma en que vivo. No exagero cuando digo que este ebook me devolvió la paz."</p>
+        <div class="test-author">
+          <div class="test-avatar">🧔</div>
+          <div>
+            <div class="test-name">Rodrigo M.</div>
+            <div class="test-info">Ingeniero · Colombia</div>
+          </div>
+        </div>
+      </div>
+      <div class="test-card">
+        <div class="stars">★★★★★</div>
+        <p class="test-text">"Soy mamá de 3 hijos y trabajadora. Pensé que el estoicismo era para académicos. Pero el método de 30 días es tan claro y práctico que lo apliqué desde el día 1. Ahora reacciono distinto ante el caos diario."</p>
+        <div class="test-author">
+          <div class="test-avatar">👩</div>
+          <div>
+            <div class="test-name">Valentina C.</div>
+            <div class="test-info">Empresaria · México</div>
+          </div>
+        </div>
+      </div>
+      <div class="test-card">
+        <div class="stars">★★★★★</div>
+        <p class="test-text">"Nunca creí que $5,90 podían cambiar tanto. Llevaba años buscando algo que me ayudara con la ansiedad laboral. El Amor Fati me cambió la perspectiva completamente."</p>
+        <div class="test-author">
+          <div class="test-avatar">🧑</div>
+          <div>
+            <div class="test-name">Daniel F.</div>
+            <div class="test-info">Ejecutivo · Argentina</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== GUARANTEE ===== -->
+<section id="guarantee">
+  <div class="geo g1"></div>
+  <div class="geo g2"></div>
+  <div class="container">
+    <div class="guarantee-inner">
+      <div class="guarantee-seal">🛡️</div>
+      <div class="guarantee-body">
+        <h2>Garantía Incondicional de 7 Días</h2>
+        <p>Prueba <strong>El Código Estoico</strong> durante 7 días completos, sin ningún riesgo. Si no sientes una diferencia real en tu mente, tu ansiedad y tu claridad de vida, te devuelvo hasta el último centavo. <strong>Sin preguntas. Sin formularios. Sin complicaciones.</strong> El único riesgo es no intentarlo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== FINAL CTA ===== -->
+<section id="cta-final">
+  <div class="geo g1"></div>
+  <div class="container cta-inner">
+    <div class="section-label" style="margin-bottom:20px;"><span class="badge badge-white">Último paso</span></div>
+    <h2 class="cta-title">Tu Mente Más Clara<br>está a un Clic de Distancia</h2>
+    <p class="cta-desc">Toma la decisión que Marco Aurelio, Epicteto y Séneca tomaron: invertir en la única cosa que nadie puede quitarte — el dominio de tu propia mente.</p>
+    <a href="https://pay.kiwify.com.br/nPdHG0c" target="_blank" class="btn btn-accent btn-large">
+      SÍ, QUIERO TRANSFORMAR MI MENTE HOY POR $5,90
+      <span class="btn-sub">🔒 Pago seguro · Acceso inmediato · Garantía 7 días</span>
+    </a>
+    <div class="cta-trust">
+      <span>✅ Sin suscripción</span>
+      <span>✅ Acceso de por vida</span>
+      <span>✅ Descarga inmediata</span>
+      <span>✅ Garantía 7 días</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== PS ===== -->
+<section id="ps">
+  <div class="container">
+    <div class="ps-inner">
+      <div class="ps-label">P.D.</div>
+      <p class="ps-text">Marco Aurelio gobernó el imperio más grande del mundo mientras mantenía su mente en paz. Epicteto fue esclavo y descubrió la libertad total. Séneca enfrentó el exilio, la traición y la muerte con serenidad. Lo que ellos lograron, tú también puedes. La diferencia no está en el talento — está en tener el método correcto. Ese método está a un clic de distancia.</p>
+      <a href="https://pay.kiwify.com.br/nPdHG0c" target="_blank" class="btn btn-primary" style="font-size:16px; padding:18px 40px;">
+        Obtener El Código Estoico — $5,90
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 El Código Estoico · Todos los derechos reservados</p>
+  <p style="margin-top:8px;"><a href="#">Política de Privacidad</a> &nbsp;·&nbsp; <a href="#">Términos y Condiciones</a> &nbsp;·&nbsp; <a href="#">Contacto</a></p>
+  <p style="margin-top:10px; opacity:0.4; font-size:11px;">Este sitio no es parte de Facebook Inc. Facebook es una marca registrada de Facebook, Inc.</p>
+</footer>
+
+</body>
+</html>
